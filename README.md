@@ -1,3 +1,9 @@
+## Yotube Tutorial Link:
+https://www.youtube.com/watch?v=Aiqzfmy9A_4&list=PLC3y8-rFHvwgC9mj0qv972IO5DmD-H0ZH&index=68
+
+## Github Link
+https://github.com/gopinav/Next-JS-Tutorials/blob/master/next-authentication/pages/api/auth/%5B...nextauth%5D.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
