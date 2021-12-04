@@ -1,11 +1,27 @@
 import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut, getSession } from 'next-auth/react'
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
 
-    const { data: session, status } = useSession()
-    const loading = status === "loading"
-    console.log(session, loading)
+    const [loading, setLoading ] = useState(true)
+    const [session, setSession ] = useState(false)
+    useEffect(()=>{
+        const securePage = async () => {
+            const session = await getSession()
+             console.log('Fetched session',session)
+            if(!session) {
+                setSession(false)
+            } else {
+                setSession(true)
+            }
+        }
+        securePage()
+    },[])
+
+    // const { session, status } = getSession()
+    // const loading = status === "loading"
+    console.log('current session',session)
 
     return (
         <nav className='header'>
@@ -28,13 +44,13 @@ export default function Navbar() {
                         <a>Blog</a>
                     </Link>
                 </li>
-                { !loading && !session && (
+                { !session && (
 
                 <li>
                 <Link href='/api/auth/signIn'>
                     <a onClick={e => {
                         e.preventDefault()
-                        signIn()
+                         signIn()
                     }}>Sign In</a>
                 </Link>
                 </li>
@@ -47,7 +63,7 @@ export default function Navbar() {
                     <Link href='/api/auth/signOut'>
                         <a onClick={e => {
                             e.preventDefault()
-                            signOut()
+                             signOut()
                         }}>Sign Out</a>
                     </Link>
                 </li>
