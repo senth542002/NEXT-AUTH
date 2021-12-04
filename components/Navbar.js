@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { signIn, signOut } from 'next-auth/react'
 
 function Navbar() {
     return (
@@ -23,13 +24,19 @@ function Navbar() {
                     </Link>
                 </li>
                 <li>
-                    <Link href='#'>
-                        <a>Sign In</a>
+                    <Link href='/api/auth/signIn'>
+                        <a onClick={e => {
+                            e.preventDefault()
+                            signIn()
+                        }}>Sign In</a>
                     </Link>
                 </li>
                 <li>
-                    <Link href='#'>
-                        <a>Sign Out</a>
+                    <Link href='/api/auth/signOut'>
+                        <a onClick={e => {
+                            e.preventDefault()
+                            signOut()
+                        }}>Sign Out</a>
                     </Link>
                 </li>
             </ul>
