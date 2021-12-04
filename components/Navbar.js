@@ -1,26 +1,26 @@
 import Link from 'next/link'
-import { signIn, signOut, getSession } from 'next-auth/react'
-import { useState, useEffect } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+// import { useState, useEffect } from 'react'
 
 export default function Navbar() {
 
-    const [loading, setLoading ] = useState(true)
-    const [session, setSession ] = useState(false)
-    useEffect(()=>{
-        const securePage = async () => {
-            const session = await getSession()
-             console.log('Fetched session',session)
-            if(!session) {
-                setSession(false)
-            } else {
-                setSession(true)
-            }
-        }
-        securePage()
-    },[])
+    // const [loading, setLoading ] = useState(true)
+    // const [session, setSession ] = useState(false)
+    // useEffect(()=>{
+    //     const securePage = async () => {
+    //         const session = await getSession()
+    //          console.log('Fetched session',session)
+    //         if(!session) {
+    //             setSession(false)
+    //         } else {
+    //             setSession(true)
+    //         }
+    //     }
+    //     securePage()
+    // },[])
 
-    // const { session, status } = getSession()
-    // const loading = status === "loading"
+    const { data: session, status } = useSession()
+    const loading = status === 'loading'
     console.log('current session',session)
 
     return (
@@ -44,7 +44,7 @@ export default function Navbar() {
                         <a>Blog</a>
                     </Link>
                 </li>
-                { !session && (
+                { !loading && !session && (
 
                 <li>
                 <Link href='/api/auth/signIn'>
